@@ -47,9 +47,8 @@ class _IndexState extends State<Index> {
             'btn',
             theme: WeButtonType.warn,
             onClick: () {
-//              WeToast.success(context)(message:'成功');
+              WeToast.success(context)(message:'成功');
 //              WeToast.fail(context)(message:'失败');
-              WeToast.toast(context)(message: '失败', duration: 2000);
             },
           ),
         ],
