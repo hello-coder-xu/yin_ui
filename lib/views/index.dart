@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ui/button/index.dart';
 import 'package:ui/toast/index.dart';
+import 'package:ui/dialog/index.dart';
 
 ///主页
 class Index extends StatefulWidget {
@@ -24,9 +25,12 @@ class _IndexState extends State<Index> {
             'btn',
             theme: WeButtonType.primary,
             onClick: () {
-              WeToast.info(context)(
-                'info',
-                align: WeToastInfoAlign.bottom,
+              WeDialog.alert(context)(
+                '弹窗内容',
+                onConfirm: () {
+                  WeToast.info(context)('点击了确认');
+                },
+                theme:WeDialogTheme.ANDROID,
               );
             },
           ),
@@ -35,11 +39,13 @@ class _IndexState extends State<Index> {
             'btn',
             theme: WeButtonType.acquiescent,
             onClick: () {
-              var close = WeToast.loading(context)(message: '加载中...');
-
-              Future.delayed(Duration(milliseconds: 2000), () {
-                if (close is Function) close();
-              });
+              WeDialog.confirm(context)(
+                '弹窗内容',
+                onConfirm: () {
+                  WeToast.info(context)('点击了确认');
+                },
+                theme:WeDialogTheme.IOS,
+              );
             },
           ),
           SizedBox(height: 10),
@@ -47,7 +53,7 @@ class _IndexState extends State<Index> {
             'btn',
             theme: WeButtonType.warn,
             onClick: () {
-              WeToast.success(context)(message:'成功');
+              WeToast.success(context)(message: '成功');
             },
           ),
         ],

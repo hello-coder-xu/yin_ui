@@ -18,6 +18,7 @@ layoutHoc({
     key: fadeInKey,
     duration: 150,
     child: Stack(
+      alignment: Alignment.center,
       children: <Widget>[
         Positioned(
           top: 0,

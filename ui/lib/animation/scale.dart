@@ -18,10 +18,10 @@ class Scale extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _ScaleState createState() => _ScaleState();
+  ScaleState createState() => ScaleState();
 }
 
-class _ScaleState extends State<Scale> with SingleTickerProviderStateMixin {
+class ScaleState extends State<Scale> with SingleTickerProviderStateMixin {
   AnimationController controller;
   Animation animation;
 

@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:ui/dialog/layout_hoc.dart';
 import 'package:ui/theme/index.dart';
 
+import '../animation/fade_in.dart';
+import '../animation/scale.dart';
+
 final double _titleSize = 18.0;
 final double _padding = boxPadding - 2;
 
@@ -11,28 +14,28 @@ final double _padding = boxPadding - 2;
 class IosWidget extends StatefulWidget {
   final dynamic title;
   final dynamic message;
-  final dynamic button;
+  final dynamic buttons;
 
   IosWidget({
     key,
     this.title,
     this.message,
-    this.button,
+    this.buttons,
   }) : super(key: key);
 
   @override
-  _IosWidgetState createState() => _IosWidgetState();
+  IosWidgetState createState() => IosWidgetState();
 }
 
-class _IosWidgetState extends State<IosWidget> {
+class IosWidgetState extends State<IosWidget> {
   final GlobalKey _fadeInKey = GlobalKey();
   final GlobalKey _scaleKey = GlobalKey();
   final _intervalSize = 1 / MediaQueryData.fromWindow(window).devicePixelRatio;
   WeTheme theme;
 
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     theme = WeUI.getTheme(context);
   }
 
@@ -42,7 +45,7 @@ class _IosWidgetState extends State<IosWidget> {
 
     final double footerHeight = 48.0;
 
-    widget.button.forEach((it) {
+    widget.buttons.forEach((it) {
       if (children.length > 0) {
         children.add(SizedBox(
           width: _intervalSize,
@@ -53,27 +56,24 @@ class _IosWidgetState extends State<IosWidget> {
             ),
           ),
         ));
-
-        children.add(
-          Expanded(
-            child: InkWell(
-              onTap: it['onClick'],
-              child: Align(
-                alignment: Alignment.center,
-                child: DefaultTextStyle(
-                  style: TextStyle(
-                    fontSize: _titleSize,
-                    color: widget.button.lenght > 1 && children.length == 0
-                        ? Color(0xff555555)
-                        : theme.primaryColor,
-                  ),
-                  child: it['widget'],
+      }
+      children.add(
+        Expanded(
+          child: InkWell(
+            onTap: it['onClick'],
+            child: Align(
+              alignment: Alignment.center,
+              child: DefaultTextStyle(
+                style: TextStyle(
+                  fontSize: _titleSize,
+                  color: widget.buttons.length > 1 && children.length == 0 ? Color(0xff555555) : theme.primaryColor,
                 ),
+                child: it['widget'],
               ),
             ),
           ),
-        );
-      }
+        ),
+      );
     });
 
     return SizedBox(
@@ -84,13 +84,22 @@ class _IosWidgetState extends State<IosWidget> {
     );
   }
 
+  // 反向执行动画
+  reverseAnimation() async {
+    (_scaleKey.currentState as ScaleState).controller.reverse();
+    await (_fadeInKey.currentState as FadeInState).controller.reverse();
+  }
+
   @override
   Widget build(BuildContext context) {
     final List<Widget> children = [
       Padding(
         padding: EdgeInsets.only(left: _padding, right: _padding, bottom: 16.0),
         child: DefaultTextStyle(
-          style: TextStyle(fontSize: 16.0),
+          style: TextStyle(
+            fontSize: 16.0,
+            color: Color(0xff808080),
+          ),
           child: widget.message,
         ),
       ),

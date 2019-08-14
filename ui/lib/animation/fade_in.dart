@@ -18,10 +18,10 @@ class FadeIn extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _FadeInState createState() => _FadeInState();
+  FadeInState createState() => FadeInState();
 }
 
-class _FadeInState extends State<FadeIn> with SingleTickerProviderStateMixin {
+class FadeInState extends State<FadeIn> with SingleTickerProviderStateMixin {
   AnimationController controller;
   Animation<double> animation;
 

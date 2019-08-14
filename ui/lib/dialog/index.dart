@@ -1,6 +1,10 @@
 //弹框类型
 import 'package:flutter/material.dart';
 
+import '../utils.dart';
+import 'ios_widget.dart';
+import 'android_widget.dart';
+
 enum WeDialogTheme { ANDROID, IOS }
 
 //弹框
@@ -36,12 +40,19 @@ typedef Confirm = Function(
 _createAndroidLayout(
   BuildContext context,
   message, {
+  //标题
   dynamic title,
+  //弹框主题
   WeDialogTheme theme,
+  //弹框类型
   String type,
+  //取消按钮
   dynamic cancelButton,
+  //确定按钮
   dynamic confirmButton,
+  //取消事件
   Function onCancel,
+  //确定事件
   Function onConfirm,
 }) {
   Function remove;
@@ -52,8 +63,62 @@ _createAndroidLayout(
 
   void close() async {
     if (theme == WeDialogTheme.ANDROID) {
-    } else {}
+      await (globalKey.currentState as AndroidWidgetState).reverseAnimation();
+    } else {
+      await (globalKey.currentState as IosWidgetState).reverseAnimation();
+    }
+    remove();
   }
+
+  //确认
+  void confirm() {
+    if (onConfirm is Function) onConfirm();
+    close();
+  }
+
+  //取消
+  void cancel() {
+    if (onCancel is Function) onCancel();
+    close();
+  }
+
+  final List<Map<String, Object>> buttons = [
+    {
+      "widget": toTextWidget(confirmButton, 'button'),
+      'onClick': confirm,
+    }
+  ];
+
+  if (type == 'confirm') {
+    buttons.insert(0, {
+      "widget": toTextWidget(cancelButton, 'button'),
+      'onClick': cancel,
+    });
+  }
+
+  switch (theme) {
+    case WeDialogTheme.IOS:
+      widget = IosWidget(
+        key: globalKey,
+        title: toTextWidget(title, 'title'),
+        message: toTextWidget(message, 'message'),
+        buttons: buttons,
+      );
+      break;
+    default:
+      widget = AndroidWidget(
+        key: globalKey,
+        title: toTextWidget(title, 'title'),
+        message: toTextWidget(message, 'message'),
+        buttons: buttons,
+      );
+  }
+
+  remove = createOverlayEntry(
+    context: context,
+    child: widget,
+    willPopCallback: cancel,
+  );
 }
 
 ///对话框
