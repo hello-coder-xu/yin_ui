@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ui/views/index.dart';
+import 'package:flutter_ui/views/button.dart';
 
 ///路由
 final routers = <String, WidgetBuilder>{
-  '/button': (context)  => Index(null),
+  '/button': (context) => Button(),
 };

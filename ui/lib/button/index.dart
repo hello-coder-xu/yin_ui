@@ -117,7 +117,7 @@ class _ButtonState extends State<WeButton> {
     final size = widget.size;
 
     //是否禁用状态
-    final disable = widget.disabled || widget.loading;
+    final bool disable = widget.disabled || widget.loading;
 
     Widget child;
     if (content is String) {
@@ -192,6 +192,7 @@ class _ButtonState extends State<WeButton> {
       height: size['height'],
       padding: EdgeInsets.only(left: 10, right: 10),
       decoration: BoxDecoration(
+        color: color,
         borderRadius: borderRadius,
         border: border,
       ),

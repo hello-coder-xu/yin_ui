@@ -100,7 +100,8 @@ class _IndexState extends State<Index> {
     return Opacity(
       opacity: checked ? 0.5 : 1.0,
       child: Padding(
-        padding: EdgeInsets.only(top: 25, bottom: 25, left: listPadding, right: listPadding),
+        padding: EdgeInsets.only(
+            top: 25, bottom: 25, left: listPadding, right: listPadding),
         child: Row(
           children: <Widget>[
             Expanded(child: child),
@@ -124,6 +125,13 @@ class _IndexState extends State<Index> {
       }
 
       content.add(ListTile(
+        onTap: () {
+          if (it['url'] == null) {
+            WeToast.info(context)('还没做好', duration: 1500);
+            return;
+          }
+          Navigator.of(context).pushNamed(it['url']);
+        },
         title: Text(it['title']),
         trailing: Icon(Icons.keyboard_arrow_right),
       ));
@@ -139,7 +147,6 @@ class _IndexState extends State<Index> {
   Widget buildContent(bool checked, int index, Widget child) {
     return child;
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -169,12 +176,15 @@ class _IndexState extends State<Index> {
               padding: EdgeInsets.all(36.0),
               child: Column(
                 children: [
-                  Row(children: [Text('Flutter WeUi', style: TextStyle(fontSize: 25.0))]),
+                  Row(children: [
+                    Text('Flutter WeUi', style: TextStyle(fontSize: 25.0))
+                  ]),
                   Container(
                     padding: EdgeInsets.only(top: 10.0),
                     child: Text(
                       'WeUI 是一套同微信原生视觉体验一致的基础样式库，由微信官方设计团队为微信内网页和微信小程序量身设计，令用户的使用感知更加统一。',
-                      style: TextStyle(fontSize: 15.0, color: Color(0xff888888)),
+                      style:
+                          TextStyle(fontSize: 15.0, color: Color(0xff888888)),
                     ),
                   )
                 ],
