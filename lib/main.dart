@@ -29,6 +29,7 @@ class _AppState extends State<App> {
               primaryColorDisabled: Color(0xff5cadff),
               warnColor: Color(0xfffb4343),
               warnColorDisabled: Color(0xfffaa7a3),
+              defaultBorderColor: Colors.white,
             ),
       weConfig: WeConfig(toastSuccessDuration: 5000),
       child: MaterialApp(

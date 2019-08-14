@@ -23,3 +23,14 @@ dev_dependencies:
 flutter:
 
   uses-material-design: true
+
+  assets:
+    - assets/images/index-icon/icon_nav_feedback.png
+    - assets/images/index-icon/icon_nav_form.png
+    - assets/images/index-icon/icon_nav_layout.png
+    - assets/images/right-icon.png
+
+  fonts:
+    - family: iconfont
+      fonts:
+        - asset: assets/font-icon/iconfont.ttf
