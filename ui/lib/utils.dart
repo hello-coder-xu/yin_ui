@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 // 字符串转Widget
 Widget toTextWidget(content, key) {
-  if (content == null) return null;
+  if (content == null) return SizedBox();
   // 判断是字符串或者是widget
   if (content is Widget == false && content is String == false) {
     throw new FormatException('$key类型只能为String || Widget');
@@ -32,7 +32,6 @@ Function createOverlayEntry({
       child: child,
     );
   });
-
 
   overlayState.insert(overlayEntry);
 

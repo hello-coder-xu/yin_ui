@@ -54,7 +54,20 @@ class _IndexState extends State<Index> {
             'btn',
             theme: WeButtonType.warn,
             onClick: () {
-              WeToast.success(context)(message: '成功');
+              WeDialog.service(context)(
+                Text(
+                  '弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.red,
+                  ),
+                ),
+                otherButton: '後可關閉',
+                onConfirm: () {
+                  WeToast.info(context)('点击了确认');
+                },
+                duration: 5,
+              );
             },
           ),
         ],

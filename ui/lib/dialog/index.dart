@@ -1,5 +1,6 @@
 //弹框类型
 import 'package:flutter/material.dart';
+import 'package:ui/dialog/service_widget.dart';
 import 'package:ui/utils.dart';
 
 import 'ios_widget.dart';
@@ -41,6 +42,21 @@ typedef Confirm = Function(
   bool barrierDismissible,
 });
 
+//服务条款阅读框
+typedef Service = Function(
+  dynamic message, {
+  //标题
+  dynamic title,
+  //确定按钮
+  dynamic confirmButton,
+  //确定事件
+  Function onConfirm,
+  //持续时间
+  int duration,
+  // 倒计时显示
+  dynamic otherButton,
+});
+
 _createAndroidLayout(
   BuildContext context,
   message, {
@@ -60,6 +76,10 @@ _createAndroidLayout(
   Function onConfirm,
   // 对话框外操作可以关闭对话
   bool barrierDismissible = true,
+  //持续时间
+  int duration,
+  // 倒计时显示文字
+  dynamic otherButton,
 }) {
   Function remove;
 
@@ -70,8 +90,10 @@ _createAndroidLayout(
   void close() async {
     if (theme == WeDialogTheme.ANDROID) {
       await (globalKey.currentState as AndroidWidgetState).reverseAnimation();
-    } else {
+    } else if (theme == WeDialogTheme.IOS) {
       await (globalKey.currentState as IosWidgetState).reverseAnimation();
+    } else {
+      await (globalKey.currentState as ServiceWidgetState).reverseAnimation();
     }
     remove();
   }
@@ -118,13 +140,24 @@ _createAndroidLayout(
         onMaskCLick: other,
       );
       break;
-    default:
+    case WeDialogTheme.ANDROID:
       widget = AndroidWidget(
         key: globalKey,
         title: toTextWidget(title, 'title'),
         message: toTextWidget(message, 'message'),
         buttons: buttons,
         onMaskCLick: other,
+      );
+      break;
+    default:
+      widget = ServiceWidget(
+        key: globalKey,
+        title: toTextWidget(title, 'title'),
+        message: toTextWidget(message, 'message'),
+        buttons: buttons,
+        onMaskCLick: other,
+        duration: duration,
+        otherButton: otherButton,
       );
   }
 
@@ -183,6 +216,30 @@ class WeDialog {
         cancelButton: cancelButton,
         onCancel: onCancel,
         barrierDismissible: barrierDismissible,
+      );
+    };
+  }
+
+  //服务条款阅读
+  static Service service(BuildContext context) {
+    return (
+      message, {
+      title = '提示',
+      confirmButton = '确认',
+      onConfirm,
+      duration = 3,
+      otherButton='后可关闭',
+    }) {
+      _createAndroidLayout(
+        context,
+        message,
+        title: title,
+        type: 'service',
+        confirmButton: confirmButton,
+        onConfirm: onConfirm,
+        barrierDismissible: false,
+        duration: duration,
+        otherButton: otherButton,
       );
     };
   }
