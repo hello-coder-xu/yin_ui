@@ -1,7 +1,7 @@
 //弹框类型
 import 'package:flutter/material.dart';
+import 'package:ui/utils.dart';
 
-import '../utils.dart';
 import 'ios_widget.dart';
 import 'android_widget.dart';
 
@@ -18,6 +18,8 @@ typedef Alert = Function(
   dynamic button,
   //按钮事件
   Function onConfirm,
+  //点击其他区域关闭对话框
+  bool barrierDismissible,
 });
 
 //确认框
@@ -35,6 +37,8 @@ typedef Confirm = Function(
   Function onConfirm,
   //取消事件
   Function onCancel,
+  //点击其他区域关闭对话框
+  bool barrierDismissible,
 });
 
 _createAndroidLayout(
@@ -54,6 +58,8 @@ _createAndroidLayout(
   Function onCancel,
   //确定事件
   Function onConfirm,
+  // 对话框外操作可以关闭对话
+  bool barrierDismissible = true,
 }) {
   Function remove;
 
@@ -82,6 +88,12 @@ _createAndroidLayout(
     close();
   }
 
+  //蒙版点击与物理返回键
+  void other() {
+    if (!barrierDismissible) return;
+    cancel();
+  }
+
   final List<Map<String, Object>> buttons = [
     {
       "widget": toTextWidget(confirmButton, 'button'),
@@ -103,6 +115,7 @@ _createAndroidLayout(
         title: toTextWidget(title, 'title'),
         message: toTextWidget(message, 'message'),
         buttons: buttons,
+        onMaskCLick: other,
       );
       break;
     default:
@@ -111,13 +124,14 @@ _createAndroidLayout(
         title: toTextWidget(title, 'title'),
         message: toTextWidget(message, 'message'),
         buttons: buttons,
+        onMaskCLick: other,
       );
   }
 
   remove = createOverlayEntry(
     context: context,
     child: widget,
-    willPopCallback: cancel,
+    willPopCallback: other,
   );
 }
 
@@ -131,6 +145,7 @@ class WeDialog {
       theme = WeDialogTheme.IOS,
       button = '确认',
       onConfirm,
+      barrierDismissible,
     }) {
       _createAndroidLayout(
         context,
@@ -140,6 +155,7 @@ class WeDialog {
         type: 'alert',
         confirmButton: button,
         onConfirm: onConfirm,
+        barrierDismissible: barrierDismissible,
       );
     };
   }
@@ -154,6 +170,7 @@ class WeDialog {
       onCancel,
       confirmButton = '确认',
       onConfirm,
+      barrierDismissible,
     }) {
       _createAndroidLayout(
         context,
@@ -165,6 +182,7 @@ class WeDialog {
         onConfirm: onConfirm,
         cancelButton: cancelButton,
         onCancel: onCancel,
+        barrierDismissible: barrierDismissible,
       );
     };
   }

@@ -12,15 +12,24 @@ final double _padding = boxPadding - 2;
 
 ///ios弹框视图
 class IosWidget extends StatefulWidget {
+  //标题
   final dynamic title;
+
+  //内容
   final dynamic message;
+
+  //按钮
   final dynamic buttons;
+
+  //关闭
+  final Function onMaskCLick;
 
   IosWidget({
     key,
     this.title,
     this.message,
     this.buttons,
+    this.onMaskCLick,
   }) : super(key: key);
 
   @override
@@ -129,6 +138,7 @@ class IosWidgetState extends State<IosWidget> {
       fadeInKey: _fadeInKey,
       maskColor: theme.maskColor,
       children: children,
+      onMaskCLick: widget.onMaskCLick,
     );
   }
 }

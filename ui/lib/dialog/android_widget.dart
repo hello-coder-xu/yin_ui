@@ -8,15 +8,24 @@ import 'layout_hoc.dart';
 final double _padding = boxPadding - 2;
 
 class AndroidWidget extends StatefulWidget {
+  //标题
   final dynamic title;
+
+  //内容
   final dynamic message;
+
+  //按钮
   final dynamic buttons;
+
+  //关闭
+  final Function onMaskCLick;
 
   AndroidWidget({
     key,
     this.title,
     this.message,
     this.buttons,
+    this.onMaskCLick,
   }) : super(key: key);
 
   @override
@@ -123,6 +132,7 @@ class AndroidWidgetState extends State<AndroidWidget> {
       fadeInKey: _fadeInKey,
       maskColor: theme.maskColor,
       children: children,
+      onMaskCLick: widget.onMaskCLick,
     );
   }
 }

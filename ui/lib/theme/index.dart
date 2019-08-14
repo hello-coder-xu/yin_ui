@@ -6,7 +6,7 @@ const Color _primaryColorDisabled = Color(0xff9ED99D);
 const Color _warnColor = Color(0xffE64340);
 const Color _warnColorDisabled = Color(0xffEC8B89);
 const Color _defaultBackgroundColor = Color(0xfff8f8f8);
-const Color _defaultBorderColor = Color(0xffd8d8d8);
+const Color _defaultBorderColor = Color(0xffededed);
 const Color _maskColor = Color.fromRGBO(17, 17, 17, 0.6);
 
 final _defaultTheme = WeTheme();

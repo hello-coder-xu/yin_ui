@@ -30,7 +30,8 @@ class _IndexState extends State<Index> {
                 onConfirm: () {
                   WeToast.info(context)('点击了确认');
                 },
-                theme:WeDialogTheme.ANDROID,
+                theme: WeDialogTheme.ANDROID,
+                barrierDismissible: false,
               );
             },
           ),
@@ -44,7 +45,7 @@ class _IndexState extends State<Index> {
                 onConfirm: () {
                   WeToast.info(context)('点击了确认');
                 },
-                theme:WeDialogTheme.IOS,
+                theme: WeDialogTheme.IOS,
               );
             },
           ),

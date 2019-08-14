@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ui/animation/fade_in.dart';
 import 'package:ui/animation/scale.dart';
+import 'package:ui/toast/index.dart';
 
 final double boxPadding = 25.0;
 
@@ -13,6 +14,8 @@ layoutHoc({
   @required List<Widget> children,
   //蒙版颜色
   @required Color maskColor,
+  //蒙版点击
+  Function onMaskCLick,
 }) {
   return FadeIn(
     key: fadeInKey,
@@ -25,7 +28,10 @@ layoutHoc({
           right: 0,
           bottom: 0,
           left: 0,
-          child: DecoratedBox(decoration: BoxDecoration(color: maskColor)),
+          child: GestureDetector(
+            onTap: onMaskCLick,
+            child: DecoratedBox(decoration: BoxDecoration(color: maskColor)),
+          ),
         ),
         Padding(
           padding: EdgeInsets.only(left: 37.0, right: 37.0),
