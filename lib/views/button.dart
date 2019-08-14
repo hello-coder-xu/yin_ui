@@ -9,18 +9,18 @@ class Button extends StatefulWidget {
 }
 
 class ButtonState extends State<Button> {
+
   @override
   void initState() {
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
-          padding: EdgeInsets.only(left: 16, right: 16,bottom: 32),
+          padding: EdgeInsets.only(left: 16, right: 16, bottom: 32),
           child: ListView(
             children: <Widget>[
               TitleView('Button', '按钮'),
