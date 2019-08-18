@@ -9,7 +9,6 @@ class Button extends StatefulWidget {
 }
 
 class ButtonState extends State<Button> {
-
   @override
   void initState() {
     super.initState();
@@ -100,6 +99,46 @@ class ButtonState extends State<Button> {
                 'warn加载中',
                 theme: WeButtonType.warn,
                 loading: true,
+              ),
+              ListTile(
+                title: Text('自定义样式'),
+              ),
+              WeButton(
+                'custom',
+                theme: WeButtonType.custom,
+                customTheme: {
+                  'backgroundColor': Colors.deepOrangeAccent,
+                  'fontColor': Colors.white,
+                  'disabledBackgroundColor': Colors.deepPurple,
+                  'borderColor': Colors.white,
+                  'hollowColor': Colors.black,
+                },
+              ),
+              SizedBox(height: 10),
+              WeButton(
+                'disabled为true',
+                theme: WeButtonType.custom,
+                disabled: true,
+                customTheme: {
+                  'backgroundColor': Colors.deepOrangeAccent,
+                  'fontColor': Colors.white,
+                  'disabledBackgroundColor': Colors.deepPurple,
+                  'borderColor': Colors.white,
+                  'hollowColor': Colors.black,
+                },
+              ),
+              SizedBox(height: 10),
+              WeButton(
+                'hollow为true',
+                theme: WeButtonType.custom,
+                hollow: true,
+                customTheme: {
+                  'backgroundColor': Colors.deepOrangeAccent,
+                  'fontColor': Colors.white,
+                  'disabledBackgroundColor': Colors.deepPurple,
+                  'borderColor': Colors.white,
+                  'hollowColor': Colors.black,
+                },
               ),
               ListTile(
                 title: Text('最小显示'),

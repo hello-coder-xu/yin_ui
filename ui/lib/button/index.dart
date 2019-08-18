@@ -4,7 +4,7 @@ import 'package:ui/icon/index.dart';
 import 'package:ui/theme/index.dart';
 
 // 颜色类型
-enum WeButtonType { acquiescent, primary, warn }
+enum WeButtonType { acquiescent, primary, warn, custom }
 
 // 大小类型
 enum WeButtonSize { acquiescent, mini }
@@ -37,6 +37,9 @@ class WeButton extends StatefulWidget {
   //圆角
   final double radius;
 
+  //自定义主题
+  final Map<String, Color> customTheme;
+
   // 大小配置
   final List<Map<String, double>> sizeConfig = [
     {'fontSize': 18.0, 'height': 45.0, 'iconSize': 16.0, 'borderSize': 0.5},
@@ -52,7 +55,15 @@ class WeButton extends StatefulWidget {
     this.disabled = false,
     this.loading = false,
     this.radius,
+    this.customTheme,
   }) {
+    if (theme == WeButtonType.custom && customTheme == null) {
+      throw Exception('themeConfig is null');
+    }
+    if (theme != WeButtonType.custom && customTheme != null) {
+      throw Exception('theme is error');
+    }
+
     this.size = sizeConfig[size.index];
     this.sizeType = size;
   }
@@ -99,7 +110,12 @@ class _ButtonState extends State<WeButton> {
       },
     ];
 
+    if (widget.customTheme != null) {
+      themeConfig.add(widget.customTheme);
+    }
+
     final themeConf = themeConfig[widget.theme.index];
+
     //判断是否空心
     this.theme = widget.hollow
         ? {
@@ -151,12 +167,14 @@ class _ButtonState extends State<WeButton> {
     }
     return Opacity(
       opacity: disable ? 0.7 : 1,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: widget.sizeType == WeButtonSize.mini
-            ? MainAxisSize.min
-            : MainAxisSize.max,
-        children: children,
+      child: Container(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: widget.sizeType == WeButtonSize.mini
+              ? MainAxisSize.min
+              : MainAxisSize.max,
+          children: children,
+        ),
       ),
     );
   }
