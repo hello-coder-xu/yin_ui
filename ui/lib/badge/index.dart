@@ -63,7 +63,7 @@ class WeBadge extends StatelessWidget {
           decoration: BoxDecoration(
             color: boxColor,
             borderRadius: radius,
-            border: boxBorder,
+            border: border ?? boxBorder,
           ),
           child: Padding(
             padding: boxPadding,

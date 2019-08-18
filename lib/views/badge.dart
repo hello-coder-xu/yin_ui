@@ -56,6 +56,23 @@ class Badge extends StatelessWidget {
               ),
             ),
           ),
+          ListTile(title: Text('自定义边框')),
+          Padding(
+              padding: EdgeInsets.only(left: 32),
+              child: Row(
+                children: <Widget>[
+                  WeBadge(
+                    child: '111',
+                    border: Border.all(color: Colors.green, width: 1),
+                  ),
+                  SizedBox(width: 10),
+                  WeBadge(
+                    child: '222',
+                    hollow: true,
+                    border: Border.all(color: Colors.green, width: 1),
+                  ),
+                ],
+              )),
         ],
       ),
     );
