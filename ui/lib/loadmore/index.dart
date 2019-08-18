@@ -11,7 +11,7 @@ const Widget _moreWidget = Text('加载更多');
 
 //加载中
 const Widget _divider =
-    Expanded(child: Divider(height: 1, color: Color(0xFF909090)));
+    Expanded(child: Divider(height: 0.5, color: Color(0xffE5E5E5)));
 
 //文字 padding
 final double _textPadding = 12.0;

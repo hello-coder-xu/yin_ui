@@ -15,7 +15,7 @@ class LoadMore extends StatelessWidget {
             loadingChild: '加载中...',
             moreChild: '没有更多',
           ),
-          SizedBox(height: 10),
+          SizedBox(height: 20),
           WeLoadMore(
             loading: false,
             loadingChild: '加载中...',
