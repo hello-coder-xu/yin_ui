@@ -3,17 +3,7 @@ import 'package:flutter_ui/component/title.dart';
 import 'package:ui/button/index.dart';
 
 //按钮
-class Button extends StatefulWidget {
-  @override
-  ButtonState createState() => ButtonState();
-}
-
-class ButtonState extends State<Button> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
+class Button extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -167,10 +157,5 @@ class ButtonState extends State<Button> {
             ],
           )),
     );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 }
