@@ -167,14 +167,12 @@ class _ButtonState extends State<WeButton> {
     }
     return Opacity(
       opacity: disable ? 0.7 : 1,
-      child: Container(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: widget.sizeType == WeButtonSize.mini
-              ? MainAxisSize.min
-              : MainAxisSize.max,
-          children: children,
-        ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: widget.sizeType == WeButtonSize.mini
+            ? MainAxisSize.min
+            : MainAxisSize.max,
+        children: children,
       ),
     );
   }
